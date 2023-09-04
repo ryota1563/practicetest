@@ -14,3 +14,20 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/list', 'ProductController@showList')->name('list');
+
+Route::get('detail/{id}','ProductController@showDetail')->name('detail');
+Route::post('detail/{id}','ProductController@update')->name('update');
+
+Route::get('/', 'ProductController@index')->name('search');
+
+Route::get('/regist','ProductController@create')->name('regist');
+Route::post('/regist','ProductController@registSubmit')->name('product.store');
+
+Route::get('/edit/{id}','ProductController@edit')->name('edit');
+
+Route::DELETE('destoroy/{id}','ProductCOntroller@destroy')->name('destroy');
