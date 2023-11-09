@@ -11,6 +11,8 @@
 
          <form action="{{ route('regist') }}" method="post" enctype="multipart/form-data">
              @csrf
+             
+             $initial_
 
              <div class="form-group">
                  <label for="product">商品名</label>

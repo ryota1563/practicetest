@@ -26,7 +26,7 @@
 
              <div class="form-group">
                  <label for="price">価格</label>
-                 <input type="text" class="form-control" id="price" name="price" placeholder="価格" value="{{ old('price') }}">
+                 <input type="text" class="form-control" id="price" name="price" placeholder="価格" value="{{ $product->price }}">
                  @if($errors->has('price'))
                      <p>{{ $errors->first('price') }}</p>
                  @endif
@@ -34,7 +34,7 @@
 
              <div class="form-group">
                  <label for="stock">在庫数</label>
-                 <input type="text" class="form-control" id="stock" name="stock" placeholder="在庫数" value="{{ old('stock') }}">
+                 <input type="text" class="form-control" id="stock" name="stock" placeholder="在庫数" value="{{ $product->stock }}">
                  @if($errors->has('comment'))
                      <p>{{ $errors->first('stock') }}</p>
                  @endif
@@ -43,34 +43,30 @@
              <div class="form-group">
              <label for="comment">コメント</label>
              <textarea class="form-control" id="comment" name="comment" placeholder="Comment">{{ old('comment') }}</textarea>
-             @if($errors->has('comment'))
-                 <p>{{ $errors->first('comment') }}</p>
+             @if($errors->has('onamae'))
+             <p class="text-danger" style="margin-bottom: 30px;">{{ $errors->first('onamae') }}</p>
              @endif
+            <button class="btn btn-lg btn-primary btn-block" type="submit">更新</button>
+
 
              <div>
-              <button type="submit" class="btn btn-default">{{ __('登録') }}</button>
-             </div>
-             <div>
-              <method="POST" action="/upload" enctype="multipart/form-data">
 
-                    {{ csrf_field() }}
 
                <input type="file" id="file" name="img_path" class="form-control">
 
-               <button type="submit" class="btn btn-primariy btn-lag">アップロード</button>
+
             </div>
 
             <div class="title m-b-md">
 
-              <a href = "{{ url('/detail') }}"><button type="submit" class="btn btn-default">戻る</button></a>
+              <button type="button" onclick="location.href='{{route('detail' , ['id' => $product->id]) }}' ">戻る</button>
+
+            </div>
 
 
 
   {{-- バリデーション --}}
-          @if($errors->has('onamae'))
-          <p class="text-danger" style="margin-bottom: 30px;">{{ $errors->first('onamae') }}</p>
-          @endif
-         <button class="btn btn-lg btn-primary btn-block" type="submit">更新</button>
+
 </form>
 
 @endsection

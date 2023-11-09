@@ -15,8 +15,40 @@ class Product extends Model
        ->select('companies.*','products.*','companies.company_name')
        ->get();
 
+
        return $products;
      }
+
+     public function indexname($keyword,$selectsearch) {
+
+        $products = DB::table('products')
+        ->join('companies', 'products.company_id', '=', 'companies.id')
+        ->select('products.*', 'companies.company_name');
+        if(!empty($keyword)) {
+          $products->where('product_name', 'LIKE', "%{$keyword}%");
+          }
+
+
+        if(!empty($selectsearch)) {
+        $products->where('company_id','=',$selectsearch);
+        //メーカー名のセレクトボックスの値を入れる、
+        }
+
+        return $products->get();
+
+      }
+
+     public function getname($id) {
+
+        $products = DB::table('products')
+        ->join('companies', 'products.company_id', '=', 'companies.id')
+        ->select('products.*','companies.company_name')
+        ->where('products.id',$id)
+        ->first();
+
+
+        return $products;
+      }
 
      public function registArticle($request, $file_name) {
 

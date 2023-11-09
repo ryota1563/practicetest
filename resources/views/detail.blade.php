@@ -30,6 +30,7 @@
                       <td>{{ $product->product_name }}</td>
                       <td>{{ $product->price }}</td>
                       <td>{{ $product->stock }}</td>
+                      <td>{{ $product->company_name }}</td>
 
                   </tr>
                   </tbody>

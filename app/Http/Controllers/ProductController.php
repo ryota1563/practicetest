@@ -22,19 +22,18 @@ class ProductController extends Controller
 
 public function index(Request $request)
 {
+
     $keyword = $request->input('keyword');
+    $selectsearch =$request->input('selectsearch');
+    //セレクトボックスノ入力値を取得、変数化する必要がある。
+    //その変数をindexnameを呼び出すときに$keywordと一緒に渡して、モデル側でも受け取れるようにする。
 
-    $query = Product::query();
-//dd($query);
-    if(!empty($keyword)) {
-        $query->where('product_name', 'LIKE', "%{$keyword}%")
-            ->orWhere('id', 'LIKE', "%{$keyword}%");
-    }
+    $model = new Product();
+    $products = $model->indexname($keyword,$selectsearch);
 
-    $products = $query->get();
     $companies = DB::table('companies')->get();
 
-    return view('list',compact('products','keyword'),['companies' => $companies]);
+    return view('list',['products' => $products,'keyword' => $keyword,'companies' => $companies]);
     //使用している変数数仁応じてcompact(一覧表示させるための中は変更する
 }
 
@@ -54,10 +53,15 @@ public function registSubmit(Request $request) {
 
     try {
       $dir = 'sample';
+      $test_image = $request->file('img_path');
+      if($test_image){
 
         // sampleディレクトリに画像を保存publicサンプル中に
         $file_name = $request->file('img_path')->getClientOriginalName();
         $request->file('img_path')->storeAs('public/' . $dir, $file_name);
+      }else{
+        $file_name = null;
+      }
 
         // 登録処理呼び出し
         $model = new Product();
@@ -78,8 +82,7 @@ public function registSubmit(Request $request) {
 public function showDetail($id)
 {
   $model = new Product();
-  $product = Product::find($id);
-
+  $product = $model->getname($id);
 
   return view('detail',['product' => $product]);
 
@@ -87,27 +90,40 @@ public function showDetail($id)
 
 
 
-public function edit($id)
-{
+public function edit($id){
+
+DB::beginTransaction();
+
+
+try {
   $product = Product::find($id);
   $companies = DB::table('companies')->get();
   // dd($product);
   return view('edit',['message' =>'編集フォーム','product' => $product,'companies' => $companies]);
+}catch (\Exception $e) {
+    DB::rollback();
+    return back();
+}
 }
 
 
-public function update(Request $request, $id)
-{
+public function update(Request $request, $id){
+  DB::beginTransaction();
+
+
+  try{
   $product = Product::find($id);
   $dir = 'sample';
 
        // アップロードされたファイル名を取得
-       $file_name = $request->file('image')->getClientOriginalName();
+       $file_name = $request->file('img_path')->getClientOriginalName();
 
        // 取得したファイル名で保存
-       $product->img_path = $request->file($request, $file_name)->storeAs($request, $file_name);
+       $product->img_path = $request->file('img_path')->storeAs('public/' . $dir, $file_name);
+       $product->img_path = $file_name;
 
-    $product->img_path = $request->input('img_path');
+
+
     $product->product_name = $request->input('product_name');
     $product->price = $request->input('price');
     $product->stock = $request->input('stock');
@@ -115,15 +131,29 @@ public function update(Request $request, $id)
 
     $product->save();
 
+    DB::commit();
+  }catch (\Exception $e) {
+      DB::rollback();
+      return back();
+  }
+
     return redirect(route('edit',['id'=>$id]));
 }
 
-public function destroy($id)
-{
+public function destroy($id){
+
+DB::beginTransaction();
+
+
+try{
     // 削除対象レコードを検索
     $product = Product::find($id);
     $product->delete();
     return redirect('list');
+}catch (\Exception $e) {
+    DB::rollback();
+    return back();
+}
 }
 }
 // }
