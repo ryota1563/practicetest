@@ -20,6 +20,7 @@
                     <th>価格</th>
                     <th>在庫数</th>
                     <th>メーカー名</th>
+                    <th>コメント</th>
 
                     </tr>
                     </thead>
@@ -31,6 +32,7 @@
                       <td>{{ $product->price }}</td>
                       <td>{{ $product->stock }}</td>
                       <td>{{ $product->company_name }}</td>
+                      <td>{{ $product->comment }}</td>
 
                   </tr>
                   </tbody>

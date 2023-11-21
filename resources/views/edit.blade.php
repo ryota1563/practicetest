@@ -35,16 +35,16 @@
              <div class="form-group">
                  <label for="stock">在庫数</label>
                  <input type="text" class="form-control" id="stock" name="stock" placeholder="在庫数" value="{{ $product->stock }}">
-                 @if($errors->has('comment'))
+                 @if($errors->has('stock'))
                      <p>{{ $errors->first('stock') }}</p>
                  @endif
              </div>
 
              <div class="form-group">
              <label for="comment">コメント</label>
-             <textarea class="form-control" id="comment" name="comment" placeholder="Comment">{{ old('comment') }}</textarea>
-             @if($errors->has('onamae'))
-             <p class="text-danger" style="margin-bottom: 30px;">{{ $errors->first('onamae') }}</p>
+             <textarea class="form-control" id="comment" name="comment" placeholder="Comment" $product->comment>{{ old('comment') }}</textarea>
+             @if($errors->has('comment'))
+             <p class="text-danger" style="margin-bottom: 30px;">{{ $errors->first('comment') }}</p>
              @endif
             <button class="btn btn-lg btn-primary btn-block" type="submit">更新</button>
 
@@ -63,9 +63,6 @@
 
             </div>
 
-
-
-  {{-- バリデーション --}}
 
 </form>
 

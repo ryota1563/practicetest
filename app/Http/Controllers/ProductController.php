@@ -108,28 +108,26 @@ try {
 
 
 public function update(Request $request, $id){
-  DB::beginTransaction();
 
+  $model = new Product();
 
-  try{
-  $product = Product::find($id);
   $dir = 'sample';
 
+  $test_image = $request->file('img_path');
+
+  DB::beginTransaction();
+  try{
+      if($test_image){
+
        // アップロードされたファイル名を取得
-       $file_name = $request->file('img_path')->getClientOriginalName();
+      $file_name = $request->file('img_path')->getClientOriginalName();
+      $model->registupdate($request, $file_name, $id);
+      $request->file('img_path')->storeAs('public/' . $dir, $file_name);
 
-       // 取得したファイル名で保存
-       $product->img_path = $request->file('img_path')->storeAs('public/' . $dir, $file_name);
-       $product->img_path = $file_name;
+    }else{
+      $model->imgupdate($request, $id);
 
-
-
-    $product->product_name = $request->input('product_name');
-    $product->price = $request->input('price');
-    $product->stock = $request->input('stock');
-    $product->company_id = $request->input('company_id');
-
-    $product->save();
+    }
 
     DB::commit();
   }catch (\Exception $e) {

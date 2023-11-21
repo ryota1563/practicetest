@@ -65,6 +65,41 @@ class Product extends Model
                ]);
        }
 
+       public function registupdate($request, $file_name,$id) {
+
+
+           DB::table('products')
+              ->where('id' '=' $id)
+              ->update([
+                     'company_id'=>$request->input('company_id'),
+                     'product_name'=>$request->input('product_name'),
+                     'price'=>$request->input('price'),
+                     'stock'=>$request->input('stock'),
+                     'comment'=>$request->input('comment'),
+                     'img_path'=>$file_name,
+                     'created_at'=> now(),
+                     'updated_at'=> now(),
+                 ]);
+
+         }
+
+
+         public function imgupdate($request, $id) {
+
+
+             DB::table('products')
+                ->where('id' '=' $id)
+                ->update([
+                       'company_id'=>$request->input('company_id'),
+                       'product_name'=>$request->input('product_name'),
+                       'price'=>$request->input('price'),
+                       'stock'=>$request->input('stock'),
+                       'comment'=>$request->input('comment'),
+                       'created_at'=> now(),
+                       'updated_at'=> now(),
+                   ]);
+           }
+
       public function showDetail($id)
       {
          $products = Product::find($id);
