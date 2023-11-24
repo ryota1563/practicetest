@@ -148,6 +148,7 @@ try{
     $product = Product::find($id);
     $product->delete();
     return redirect('list');
+    DB::commit();
 }catch (\Exception $e) {
     DB::rollback();
     return back();

@@ -69,7 +69,7 @@ class Product extends Model
 
 
            DB::table('products')
-              ->where('id' '=' $id)
+              ->where('id', '=', $id)
               ->update([
                      'company_id'=>$request->input('company_id'),
                      'product_name'=>$request->input('product_name'),
@@ -88,7 +88,7 @@ class Product extends Model
 
 
              DB::table('products')
-                ->where('id' '=' $id)
+                ->where('id', '=', $id)
                 ->update([
                        'company_id'=>$request->input('company_id'),
                        'product_name'=>$request->input('product_name'),

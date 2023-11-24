@@ -42,7 +42,7 @@
 
              <div class="form-group">
              <label for="comment">コメント</label>
-             <textarea class="form-control" id="comment" name="comment" placeholder="Comment" $product->comment>{{ old('comment') }}</textarea>
+             <textarea class="form-control" id="comment" name="comment" placeholder="Comment">{{ $product->comment }}</textarea>
              @if($errors->has('comment'))
              <p class="text-danger" style="margin-bottom: 30px;">{{ $errors->first('comment') }}</p>
              @endif
