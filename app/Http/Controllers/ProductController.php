@@ -147,12 +147,13 @@ try{
     // 削除対象レコードを検索
     $product = Product::find($id);
     $product->delete();
-    return redirect('list');
+
     DB::commit();
 }catch (\Exception $e) {
     DB::rollback();
     return back();
 }
+return redirect('list');
 }
 }
 // }
