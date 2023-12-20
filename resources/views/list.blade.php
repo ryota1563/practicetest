@@ -11,9 +11,9 @@
 
                 @csrf
                    <body>
-                     <div>
+                     <div class="user-search-form">
                        <form action="{{ route('search')}}" method="GET">
-                         <input type="text" name="keyword" value="">
+                         <input type="text" id="search_name” name="keyword" value="">
                          <input type="submit" value="検索">
                       </div>
 
@@ -26,6 +26,23 @@
                 @endforeach
 
               </select>
+
+
+              <div class="price.search">
+                 <label for="price">{{ __('価格') }}</label>
+
+                <div class="jougen">
+                 <p>{{ __('上限') }}</p>
+                  <input type="number" name="jougen.price" id="jougen.price" >
+                </div>
+
+               <div class="kagen">
+                 <p>{{ __('下限') }}</p>
+                 <input type="number" name="kagen.price" id="kagen.price" >
+               </div>
+
+              </div>
+
             </form>
 
 

@@ -19,11 +19,11 @@ class Product extends Model
        return $products;
      }
 
-     public function indexname($keyword,$selectsearch) {
+     public function indexname($keyword,$selectsearch,$jougenprice,$kagenprice) {
 
         $products = DB::table('products')
         ->join('companies', 'products.company_id', '=', 'companies.id')
-        ->select('products.*', 'companies.company_name');
+        ->select('products.*','companies.company_name');
         if(!empty($keyword)) {
           $products->where('product_name', 'LIKE', "%{$keyword}%");
           }
@@ -32,6 +32,12 @@ class Product extends Model
         if(!empty($selectsearch)) {
         $products->where('company_id','=',$selectsearch);
         //メーカー名のセレクトボックスの値を入れる、
+        }
+
+        if(!empty($jougenprice)){
+            $products->where('price','<',$jougenprice);
+        }elseif($kagenprice){
+            $products->where('price','>',$kagenprice);
         }
 
         return $products->get();

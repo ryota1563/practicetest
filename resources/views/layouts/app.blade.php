@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <title>@yield('title')</title>
+    <script src = "{{ asset('js/product.js') }}"></script>
+    
 </head>
 <body>
     <div class="container">

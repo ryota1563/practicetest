@@ -28,12 +28,20 @@ public function index(Request $request)
     //セレクトボックスノ入力値を取得、変数化する必要がある。
     //その変数をindexnameを呼び出すときに$keywordと一緒に渡して、モデル側でも受け取れるようにする。
 
+        $jougenprice = $request->input('jougen.price');
+        $kagenprice = $request->input('kagen.price');
+        $jougenstock = $request->input('jougen.stock');
+        $kagenstock = $request->input('kagen.stock');
+
+
     $model = new Product();
-    $products = $model->indexname($keyword,$selectsearch);
+    $products = $model->indexname($keyword,$selectsearch,$jougenprice,$kagenprice);
+
+
 
     $companies = DB::table('companies')->get();
 
-    return view('list',['products' => $products,'keyword' => $keyword,'companies' => $companies]);
+    return view('list',['products' => $products,'keyword' => $keyword,'companies' => $companies,'jougenprice' => $jougenprice,'kagenprice' => $kagenprice]);
     //使用している変数数仁応じてcompact(一覧表示させるための中は変更する
 }
 
