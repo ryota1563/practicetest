@@ -19,7 +19,7 @@ class Product extends Model
        return $products;
      }
 
-     public function indexname($keyword,$selectsearch,$jougenprice,$kagenprice) {
+     public function indexname($keyword,$selectsearch,$jougenprice,$kagenprice,$jougenstock,$kagenstock) {
 
         $products = DB::table('products')
         ->join('companies', 'products.company_id', '=', 'companies.id')
@@ -38,6 +38,12 @@ class Product extends Model
             $products->where('price','<',$jougenprice);
         }elseif($kagenprice){
             $products->where('price','>',$kagenprice);
+        }
+
+        if(!empty($jougenstock)){
+            $products->where('stock','<',$jougenstock);
+        }elseif($kagenstock){
+            $products->where('stock','>',$kagenstock);
         }
 
         return $products->get();

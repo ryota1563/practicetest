@@ -12,9 +12,9 @@
                 @csrf
                    <body>
                      <div class="user-search-form">
-                       <form action="{{ route('search')}}" method="GET">
-                         <input type="text" id="search_name” name="keyword" value="">
-                         <input type="submit" value="検索">
+                       <form id="searchForm">
+                         <input type="text" id="searchInput" placeholder="商品名を入力">
+                         <button type="button" id="search_name"  class="btn search-icon">検索</button>
                       </div>
 
 
@@ -43,12 +43,28 @@
 
               </div>
 
+              <div class="stock.search">
+                 <label for="price">{{ __('在庫') }}</label>
+
+                <div class="jougen">
+                 <p>{{ __('上限') }}</p>
+                  <input type="number" name="jougen.stock" id="jougen.stock" >
+                </div>
+
+               <div class="kagen">
+                 <p>{{ __('下限') }}</p>
+                 <input type="number" name="kagen.stock" id="kagen.stock" >
+               </div>
+
+              </div>
             </form>
 
 
               <a href="{{ url('/regist') }}">新規登録</a>
 
-              <table border ="1">
+              <div  id = "products-table">
+
+              <table border ="1" >
                 <ul class ="target-area">
                     <tr>
                       <th>ID</th>
@@ -89,6 +105,8 @@
 
                   </ul>
                 </table>
+
+            </div>
                </body>
         </div>
     </div>

@@ -23,7 +23,7 @@ Route::get('/list', 'ProductController@showList')->name('list');
 Route::get('detail/{id}','ProductController@showDetail')->name('detail');
 Route::post('detail/{id}','ProductController@update')->name('update');
 
-Route::get('/', 'ProductController@index')->name('search');
+Route::get('/search', 'ProductController@index')->name('search');
 
 Route::get('/regist','ProductController@create')->name('regist');
 Route::post('/regist','ProductController@registSubmit')->name('product.store');

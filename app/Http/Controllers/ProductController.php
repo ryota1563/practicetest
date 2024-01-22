@@ -24,7 +24,7 @@ public function index(Request $request)
 {
 
     $keyword = $request->input('keyword');
-    $selectsearch =$request->input('selectsearch');
+    $selectsearch = $request->input('selectsearch');
     //セレクトボックスノ入力値を取得、変数化する必要がある。
     //その変数をindexnameを呼び出すときに$keywordと一緒に渡して、モデル側でも受け取れるようにする。
 
@@ -35,13 +35,13 @@ public function index(Request $request)
 
 
     $model = new Product();
-    $products = $model->indexname($keyword,$selectsearch,$jougenprice,$kagenprice);
+    $products = $model->indexname($keyword,$selectsearch,$jougenprice,$kagenprice,$jougenstock,$kagenstock);
 
 
 
     $companies = DB::table('companies')->get();
 
-    return view('list',['products' => $products,'keyword' => $keyword,'companies' => $companies,'jougenprice' => $jougenprice,'kagenprice' => $kagenprice]);
+    return view('list',['products' => $products,'keyword' => $keyword,'companies' => $companies,'jougenprice' => $jougenprice,'kagenprice' => $kagenprice,'jougenstock' => $jougenstock,'kagenstock' => $kagenstock]);
     //使用している変数数仁応じてcompact(一覧表示させるための中は変更する
 }
 
