@@ -30,4 +30,4 @@ Route::post('/regist','ProductController@registSubmit')->name('product.store');
 
 Route::get('/edit/{id}','ProductController@edit')->name('edit');
 
-Route::DELETE('destoroy/{id}','ProductCOntroller@destroy')->name('destroy');
+Route::DELETE('/destroy/{id}','ProductController@destroy')->name('destroy');

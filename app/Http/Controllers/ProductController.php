@@ -23,15 +23,15 @@ class ProductController extends Controller
 public function index(Request $request)
 {
 
-    $keyword = $request->input('keyword');
+    $keyword = $request->input('search_name');
     $selectsearch = $request->input('selectsearch');
     //セレクトボックスノ入力値を取得、変数化する必要がある。
     //その変数をindexnameを呼び出すときに$keywordと一緒に渡して、モデル側でも受け取れるようにする。
 
-        $jougenprice = $request->input('jougen.price');
-        $kagenprice = $request->input('kagen.price');
-        $jougenstock = $request->input('jougen.stock');
-        $kagenstock = $request->input('kagen.stock');
+        $jougenprice = $request->input('jougen-price');
+        $kagenprice = $request->input('kagen-price');
+        $jougenstock = $request->input('jougen-stock');
+        $kagenstock = $request->input('kagen-stock');
 
 
     $model = new Product();
