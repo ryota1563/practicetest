@@ -1,5 +1,5 @@
 
-$(function(){
+$(function deleteEvent(){
   $('#sorttable').tablesorter({
   headers: {
       0: {sorter:false},
@@ -10,6 +10,7 @@ $(function(){
 
 })
 $("#search_name").on('click', function () {
+
  console.log('検索ボタン押下');
 
 let companyName = $('#searchInput').val();
@@ -19,6 +20,8 @@ let jougenName = $('#jougen-price').val();
 let kagenName = $('#kagen-price').val();
 let jougenStock = $('#jougen-stock').val();
 let kagenStock = $('#kagen-stock').val();
+
+deleteEvent()
 
         $.ajax({
             type: 'GET',
@@ -44,10 +47,13 @@ let kagenStock = $('#kagen-stock').val();
               console.log('検索失敗')        //デフォルトソート
     })
   })
+
   $(".btn-dell").on('click', function (e){
 
     e.preventDefault();
   console.log("成功")
+
+  deleteEvent()
   var clickEle = $(this)
    // 削除ボタンにユーザーIDをカスタムデータとして埋め込んでます。
    var deleteProduct = clickEle.attr('data-product_id');

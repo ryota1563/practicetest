@@ -18,11 +18,11 @@
                       </div>
 
 
-              <select name="selectsearch">
+              <select name="selectsearch" id="selectSearch">
                 <option value="">未選択</option>
                 <!-- 未選択の場合、メーカー名のみも検索可能にする -->
                 @foreach($companies as $company)
-                <option value="{{ $company->id }}" id=selectsearch >{{ $company->company_name }}</option>
+                <option value="{{ $company->id }}">{{ $company->company_name }}</option>
                 @endforeach
 
               </select>
