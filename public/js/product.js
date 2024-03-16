@@ -1,5 +1,5 @@
 
-$(function (){
+function sortEvent(){
 
 deleteEvent()
 
@@ -36,7 +36,7 @@ let kagenStock = $('#kagen-stock').val();
             },
             dataType: 'html', //json形式で受け取る
 
-         }).done(function deleteEvent(data){
+         }).done(function sortEvent(data){
            // console.log(data);
            let newTable = $(data).find('#products-table');
            $('#products-table').replaceWith(newTable);
@@ -83,4 +83,4 @@ let kagenStock = $('#kagen-stock').val();
                     })
   })
 }
-  })
+  }
