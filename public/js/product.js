@@ -39,16 +39,16 @@ let kagenStock = $('#kagen-stock').val();
            let newTable = $(data).find('#products-table');
            $('#products-table').replaceWith(newTable);
 
-
+sortEvent();
         }
 
-        sortEvent()
+
       ).fail(function(){
               //通信が失敗した時に実行される処理
               console.log('検索失敗')        //デフォルトソート
     })
   })
-)
+
 
   function deleteEvent(){
   $(".btn-dell").on('click', function (e){
