@@ -1,15 +1,9 @@
 
-function sortEvent(){
+$(function(){
 
-  $('#sorttable').tablesorter({
-  headers: {
-      0: {sorter:false},
-      1: {sorter:false},
-      2: {sorter:true},
-  },
-  sortList: [[0,1],[2,0]],
+  sortEvent();
+  deleteEvent();
 
-})
 $("#search_name").on('click', function () {
  console.log('検索ボタン押下');
 
@@ -34,12 +28,14 @@ let kagenStock = $('#kagen-stock').val();
             },
             dataType: 'html', //json形式で受け取る
 
-         }).done(function replaceWith(data){
+         }).done(function(data){
            // console.log(data);
            let newTable = $(data).find('#products-table');
            $('#products-table').replaceWith(newTable);
 
 sortEvent();
+deleteEvent();
+
         }
 
 
@@ -48,6 +44,20 @@ sortEvent();
               console.log('検索失敗')        //デフォルトソート
     })
   })
+})
+
+  function sortEvent(){
+
+    $('#sorttable').tablesorter({
+    headers: {
+        0: {sorter:false},
+        1: {sorter:false},
+        2: {sorter:true},
+    },
+    sortList: [[0,1],[2,0]],
+
+  })
+}
 
 
   function deleteEvent(){
@@ -85,5 +95,4 @@ sortEvent();
                       console.log('削除失敗')
                     })
   })
-}
 }
