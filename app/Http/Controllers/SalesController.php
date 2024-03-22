@@ -10,6 +10,12 @@ class SalesController extends Controller
 {
   public function purchase(Request $request)
 {
+
+
+  DB::beginTransaction();
+
+  try{
+
   // リクエストから必要なデータを取得する
   $productId = $request->input('product_id'); // "product_id":7が送られた場合は7が代入される
   $quantity = $request->input('quantity', 1); // 購入する数を代入する もしも”quantity”というデータが送られていない場合は1を代入する
@@ -37,6 +43,12 @@ class SalesController extends Controller
   ]);
 
   $sale->save();
+
+
+
+  DB::commit();
+} catch (\Exception $e) {
+DB::rollBack();
 
   // レスポンスを返す
   return response()->json(['message' => '購入成功']);

@@ -8,7 +8,7 @@ $("#search_name").on('click', function () {
  console.log('検索ボタン押下');
 
 let companyName = $('#searchInput').val();
-let makerName = $('#selectsearch').val();
+let makerName = $('#selectSearch').val();
 console.log(makerName);
 let jougenName = $('#jougen-price').val();
 let kagenName = $('#kagen-price').val();
