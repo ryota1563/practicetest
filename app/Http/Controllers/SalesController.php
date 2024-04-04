@@ -40,6 +40,7 @@ class SalesController extends Controller
       'product_id' => $productId,
       'quantity' => $quantity,
   ]);
+return response()->json('message');
 
   $sale->save();
 
@@ -48,6 +49,7 @@ class SalesController extends Controller
   DB::commit();
 
   return response()->json(['message' => '購入成功']);
+
 
 } catch (\Exception $e) {
 DB::rollBack();
