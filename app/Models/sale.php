@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Models\Product;
@@ -11,7 +10,7 @@ use App\Models\Product;
 
 class sale extends Model
 {
-    use HasFactory;
+    
 
     public function product()
     {
